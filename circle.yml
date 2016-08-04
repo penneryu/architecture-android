@@ -19,4 +19,4 @@ dependencies:
 test: 
   override:
     - ./gradlew assembleRelease
-    - cp -r architecture/build/outputs $CIRCLE_ARTIFACTS
+    - cp -r architecture/app/build/outputs $CIRCLE_ARTIFACTS
