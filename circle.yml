@@ -1,0 +1,22 @@
+general:
+  artifacts:
+    - /home/ubuntu/architecture/app/build/outputs/apk/
+
+machine:
+  environment:
+    ANDROID_HOME: /usr/local/android-sdk-linux
+    ANDROID_NDK_HOME: ${ANDROID_NDK}
+  java:
+    version: oraclejdk8
+
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter "tools"
+    - echo y | android update sdk --no-ui --all --filter "android-24"
+    - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
+    - echo y | android update sdk --no-ui --all --filter "build-tools-24.0.1"
+
+test: 
+  override:
+    - ./gradlew assembleRelease
+    - cp -r architecture/build/outputs $CIRCLE_ARTIFACTS
