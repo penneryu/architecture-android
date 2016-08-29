@@ -1,5 +1,7 @@
 package com.penner.architecture.presenter;
 
+import android.util.Log;
+
 import com.penner.architecture.DomainDaggerModel;
 import com.penner.architecture.model.DataProvider;
 import com.penner.architecture.model.ErrorInfo;
@@ -8,6 +10,7 @@ import com.penner.architecture.model.http.PennerCategoryModel;
 import com.penner.architecture.model.http.PennerDataProvier;
 import com.penner.architecture.model.sqlite.YuCategoryModel;
 import com.penner.architecture.model.sqlite.YuDataProvider;
+import com.penner.architecture.presenter.dagger.IPennerDaggerProvider;
 import com.penner.architecture.view.DaggerView;
 
 import java.util.List;
@@ -23,19 +26,24 @@ public class DaggerPresenter {
     private PennerDataProvier pennerDataProvier;
     private YuDataProvider yuDataProvider;
     private DaggerView daggerView;
+    private IPennerDaggerProvider pennerDaggerProvider;
 
     @Inject
     public DaggerPresenter(DomainDaggerModel.DomainDaggerProvider daggerProvider
             , PennerDataProvier pennerDataProvier
             , YuDataProvider yuDataProvider
-            , DaggerView daggerView) {
+            , DaggerView daggerView
+            , IPennerDaggerProvider pennerDaggerProvider) {
         this.domainProvider = daggerProvider;
         this.pennerDataProvier = pennerDataProvier;
         this.yuDataProvider = yuDataProvider;
         this.daggerView = daggerView;
+        this.pennerDaggerProvider = pennerDaggerProvider;
     }
 
     public void loadDatas() {
+        pennerDaggerProvider.action1();
+        Log.e("dagger", pennerDaggerProvider.value1());
         daggerView.loadData(domainProvider.getDomainDagger());
 
         pennerDataProvier.getCategory(new DataProvider<ListDataModel<PennerCategoryModel>>() {

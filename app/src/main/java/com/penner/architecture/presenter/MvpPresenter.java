@@ -28,6 +28,12 @@ public class MvpPresenter extends BasePresenter<MvpView> {
         yuDataProvider = new YuDataProvider(context);
     }
 
+    public void loadDatas() {
+        mvpView.onLoadding(true);
+        getMainString();
+        getTwoString();
+    }
+
     public void getMainString() {
         pennerDataProvier.getCategory(new DataProvider<ListDataModel<PennerCategoryModel>>() {
             @Override
@@ -45,6 +51,7 @@ public class MvpPresenter extends BasePresenter<MvpView> {
                     builder.append("; ");
                 }
                 mvpView.onShowMainString(builder.toString());
+                mvpView.onLoadding(false);
             }
 
             @Override

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        
+        <variable
+            name="penner"
+            type="com.penner.architecture.view.databinding.DatabindingViewModel"/>
+        
+        <variable
+            name="presenter"
+            type="com.penner.architecture.presenter.MvpPresenter"/>
+
+    </data>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onRefresh="@{presenter}">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{penner.loadding  ? View.GONE : View.VISIBLE}">
+
+            <TextView
+                android:id="@+id/mvp_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{penner.mainString}"/>
+
+            <TextView
+                android:id="@+id/two_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mvp_txt"
+                android:layout_marginTop="10dp"
+                android:text="@{penner.twoString}"/>
+
+        </RelativeLayout>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</layout>

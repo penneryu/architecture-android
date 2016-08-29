@@ -2,6 +2,7 @@ package com.penner.architecture.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.penner.architecture.R;
@@ -20,14 +21,10 @@ public class MvpActivity extends AppCompatActivity implements MvpView {
 
         mMvpTxt = (TextView)findViewById(R.id.mvp_txt);
         mTwoTxt = (TextView)findViewById(R.id.two_txt);
-        loadDatas();
-    }
 
-    public void loadDatas() {
         presenter = new MvpPresenter(this);
         presenter.attachView(this);
-        presenter.getMainString();
-        presenter.getTwoString();
+        presenter.loadDatas();
     }
 
     @Override
@@ -38,6 +35,17 @@ public class MvpActivity extends AppCompatActivity implements MvpView {
     @Override
     public void onShowTwoString(String json) {
         mTwoTxt.setText(json);
+    }
+
+    @Override
+    public void onLoadding(boolean loadding) {
+        if (loadding) {
+            mMvpTxt.setVisibility(View.GONE);
+            mTwoTxt.setVisibility(View.GONE);
+        } else {
+            mMvpTxt.setVisibility(View.VISIBLE);
+            mTwoTxt.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

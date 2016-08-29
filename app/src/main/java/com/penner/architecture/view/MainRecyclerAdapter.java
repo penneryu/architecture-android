@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.penner.architecture.R;
+import com.penner.architecture.view.databinding.DatabindingActivity;
 
 import java.util.List;
 
@@ -45,6 +46,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
                         break;
                     case 1:
                         context.startActivity(new Intent(context, DaggerActivity.class));
+                        break;
+                    case 2:
+                        context.startActivity(new Intent(context, DatabindingActivity.class));
                         break;
                 }
             }

@@ -35,4 +35,9 @@ public class PennerPresenterModule {
     YuDataProvider providerLocalDataProvider(Context context) {
         return new YuDataProvider(context);
     }
+
+    @Provides
+    IPennerDaggerProvider providerPennerProvider() {
+        return new PennerDaggerProviderImpl();
+    }
 }

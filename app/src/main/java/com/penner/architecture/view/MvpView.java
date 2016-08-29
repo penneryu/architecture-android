@@ -8,4 +8,6 @@ public interface MvpView {
     void onShowMainString(String json);
 
     void onShowTwoString(String json);
+    
+    void onLoadding(boolean loadding);
 }

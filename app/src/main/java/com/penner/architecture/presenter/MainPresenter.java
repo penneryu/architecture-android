@@ -17,6 +17,7 @@ public class MainPresenter extends BasePresenter<MainView> {
         List<String> datas = new ArrayList<>();
         datas.add("MVP");
         datas.add("Dagger");
+        datas.add("Databinding");
         mainView.loadDatas(datas);
     }
 
