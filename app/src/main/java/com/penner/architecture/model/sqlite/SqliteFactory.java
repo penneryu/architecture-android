@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
+import com.penner.architecture.base.BaseSqliteSubscriber;
 import com.penner.architecture.model.DataProvider;
 import com.penner.architecture.util.LogUtils;
 import com.squareup.sqlbrite.BriteDatabase;
@@ -14,7 +15,6 @@ import com.squareup.sqlbrite.SqlBrite;
 import java.util.List;
 
 import rx.Observable;
-import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -74,22 +74,7 @@ public abstract class SqliteFactory<T> {
                         .observeOn(AndroidSchedulers.mainThread())
                         .toList();
                     }
-                }).subscribe(new Observer<List<T>>() {
-                    @Override
-                    public void onCompleted() {
-                        db.close();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        dataProvider.dataError(null);
-                    }
-
-                    @Override
-                    public void onNext(List<T> ts) {
-                        dataProvider.dataSuccess(ts);
-                    }
-                });
+                }).subscribe(new BaseSqliteSubscriber<>(dataProvider, db));
 
         } catch (Exception e) {
             e.printStackTrace();
