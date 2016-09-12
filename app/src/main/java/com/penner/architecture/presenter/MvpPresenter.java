@@ -2,12 +2,14 @@ package com.penner.architecture.presenter;
 
 import android.content.Context;
 
+import com.penner.architecture.PennerApplication;
 import com.penner.architecture.base.BasePresenter;
 import com.penner.architecture.model.DataProvider;
 import com.penner.architecture.model.ErrorInfo;
 import com.penner.architecture.model.ListDataModel;
 import com.penner.architecture.model.http.PennerCategoryModel;
 import com.penner.architecture.model.http.PennerDataProvier;
+import com.penner.architecture.model.sp.SettingPreferencesFactory;
 import com.penner.architecture.model.sqlite.YuCategoryModel;
 import com.penner.architecture.model.sqlite.YuDataProvider;
 import com.penner.architecture.view.MvpView;
@@ -30,11 +32,12 @@ public class MvpPresenter extends BasePresenter<MvpView> {
 
     public void loadDatas() {
         mvpView.onLoadding(true);
-        getMainString();
-        getTwoString();
+        getHttpString();
+        getaSqliteString();
+        getSPString();
     }
 
-    public void getMainString() {
+    public void getHttpString() {
         pennerDataProvier.getCategory(new DataProvider<ListDataModel<PennerCategoryModel>>() {
             @Override
             public void dataSuccess(ListDataModel<PennerCategoryModel> result) {
@@ -50,7 +53,7 @@ public class MvpPresenter extends BasePresenter<MvpView> {
                     builder.append(categoryModel.name);
                     builder.append("; ");
                 }
-                mvpView.onShowMainString(builder.toString());
+                mvpView.showHttpString(builder.toString());
                 mvpView.onLoadding(false);
             }
 
@@ -61,7 +64,7 @@ public class MvpPresenter extends BasePresenter<MvpView> {
         });
     }
 
-    public void getTwoString() {
+    public void getaSqliteString() {
         YuCategoryModel categoryModel = new YuCategoryModel();
         categoryModel.name = "penner";
         yuDataProvider.insertRecord(categoryModel);
@@ -80,7 +83,7 @@ public class MvpPresenter extends BasePresenter<MvpView> {
                     builder.append(categoryModel.name);
                     builder.append("; ");
                 }
-                mvpView.onShowTwoString(builder.toString());
+                mvpView.showSqliteString(builder.toString());
             }
 
             @Override
@@ -88,6 +91,18 @@ public class MvpPresenter extends BasePresenter<MvpView> {
 
             }
         });
+    }
+
+    public void getSPString() {
+        if (mvpView == null) {
+            return;
+        }
+        SettingPreferencesFactory settingPreferencesFactory = new SettingPreferencesFactory(PennerApplication.sContext);
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.valueOf(settingPreferencesFactory.getBoolValue(SettingPreferencesFactory.sBoolType, false)));
+        builder.append(" ");
+        builder.append(settingPreferencesFactory.getStringValue(SettingPreferencesFactory.sStringType));
+        mvpView.showSPString(builder.toString());
     }
 
     @Override

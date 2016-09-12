@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">architecture</string>
+
+    <string name="penner_netfail">错误: 请检查网络</string>
 </resources>

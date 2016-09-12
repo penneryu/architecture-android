@@ -2,13 +2,11 @@ package com.penner.architecture.model.sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.penner.architecture.base.BaseSubscriber;
 import com.penner.architecture.model.DataProvider;
+import com.penner.architecture.util.LogUtils;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.QueryObservable;
 import com.squareup.sqlbrite.SqlBrite;
@@ -17,9 +15,7 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Observer;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -126,7 +122,7 @@ public abstract class SqliteFactory<T> {
         try {
             db.execSQL(String.format("DROP TABLE IF EXISTS %s", tableName));
         } catch (Exception e) {
-            Log.e("LocalFactoryBase", "drop table:" + tableName + "error.");
+            LogUtils.e("LocalFactoryBase", "drop table:" + tableName + "error.");
         }
     }
 }

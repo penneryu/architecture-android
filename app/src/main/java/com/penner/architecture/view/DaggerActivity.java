@@ -1,18 +1,18 @@
 package com.penner.architecture.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.penner.architecture.PennerApplication;
 import com.penner.architecture.R;
+import com.penner.architecture.base.BaseActivity;
 import com.penner.architecture.presenter.DaggerPresenter;
 import com.penner.architecture.presenter.dagger.DaggerPennerComponent;
 import com.penner.architecture.presenter.dagger.PennerPresenterModule;
 
 import javax.inject.Inject;
 
-public class DaggerActivity extends AppCompatActivity implements DaggerView {
+public class DaggerActivity extends BaseActivity implements DaggerView {
 
     @Inject
     DaggerPresenter presenter;

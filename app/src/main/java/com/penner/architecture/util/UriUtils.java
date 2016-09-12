@@ -5,5 +5,13 @@ package com.penner.architecture.util;
  */
 public final class UriUtils {
 
-    public final static String s9Host = "http://9.fanli.com/";
+    public static String s9Host;
+
+    static {
+        if (ConfigInfo.isPreview) {
+            s9Host = "http://9.fanli.com/";
+        } else {
+            s9Host = "http://9.fanli.com/";
+        }
+    }
 }

@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.penner.architecture.R;
 import com.penner.architecture.view.databinding.DatabindingActivity;
+import com.penner.architecture.widget.AsyncImageView;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     @Override
     public void onBindViewHolder(final CellViewHodler holder, int position) {
         String data = datas.get(position);
+        holder.img.setImageUrl("http://img.vision.pptv.com/images/1c/f8/1cf8b6806829e5ffcd958f2da5f436ba7e936e55.jpeg");
         holder.title.setText(data);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,11 +65,14 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
     static class CellViewHodler extends RecyclerView.ViewHolder {
 
+        AsyncImageView img;
         TextView title;
 
         public CellViewHodler(View view) {
             super(view);
-            title = (TextView)itemView.findViewById(R.id.penner_recycler_txt_tile);
+
+            img = (AsyncImageView)itemView.findViewById(R.id.penner_recycler_item_img);
+            title = (TextView)itemView.findViewById(R.id.penner_recycler_item_tile);
         }
     }
 }

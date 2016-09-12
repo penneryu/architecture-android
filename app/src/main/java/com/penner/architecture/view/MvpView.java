@@ -5,9 +5,11 @@ package com.penner.architecture.view;
  */
 public interface MvpView {
 
-    void onShowMainString(String json);
+    void showHttpString(String json);
 
-    void onShowTwoString(String json);
+    void showSqliteString(String json);
+
+    void showSPString(String json);
     
     void onLoadding(boolean loadding);
 }

@@ -3,14 +3,14 @@ package com.penner.architecture.view.databinding;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 
 import com.penner.architecture.R;
+import com.penner.architecture.base.BaseActivity;
 import com.penner.architecture.databinding.ActivityDatabindingBinding;
 import com.penner.architecture.presenter.MvpPresenter;
 import com.penner.architecture.view.MvpView;
 
-public class DatabindingActivity extends AppCompatActivity implements MvpView {
+public class DatabindingActivity extends BaseActivity implements MvpView {
 
     private MvpPresenter presenter;
     private DatabindingViewModel viewModel;
@@ -31,13 +31,18 @@ public class DatabindingActivity extends AppCompatActivity implements MvpView {
     }
 
     @Override
-    public void onShowMainString(String json) {
+    public void showHttpString(String json) {
         viewModel.setMain(json);
     }
 
     @Override
-    public void onShowTwoString(String json) {
+    public void showSqliteString(String json) {
         viewModel.setTwo(json);
+    }
+
+    @Override
+    public void showSPString(String json) {
+
     }
 
     @Override

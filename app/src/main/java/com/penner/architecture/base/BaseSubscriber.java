@@ -1,10 +1,13 @@
 package com.penner.architecture.base;
 
 import android.util.JsonReader;
-import android.util.Log;
+import android.widget.Toast;
 
+import com.penner.architecture.PennerApplication;
+import com.penner.architecture.R;
 import com.penner.architecture.model.DataProvider;
 import com.penner.architecture.model.ErrorInfo;
+import com.penner.architecture.util.LogUtils;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -35,10 +38,13 @@ public class BaseSubscriber<T> implements Observer<T> {
             ResponseBody responseBody = ((HttpException) e).response().errorBody();
             ErrorInfo errorInfo = parseError(responseBody);
             mDataProvider.dataError(errorInfo);
+            Toast.makeText(PennerApplication.sContext, errorInfo.message, Toast.LENGTH_SHORT).show();
         } else {
             e.printStackTrace();
             if (e instanceof ConnectException) {
                 mDataProvider.dataError(null);
+                Toast.makeText(PennerApplication.sContext,
+                        PennerApplication.sContext.getString(R.string.penner_netfail), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -56,9 +62,9 @@ public class BaseSubscriber<T> implements Observer<T> {
             ErrorInfo errorInfo = new ErrorInfo();
             while (json.hasNext()) {
                 String name = json.nextName();
-                if (name.equals("code")) {
+                if ("code".equals(name)) {
                     errorInfo.code = json.nextInt();
-                } else if (name.equals("message")) {
+                } else if ("message".equals(name)) {
                     errorInfo.message = json.nextString();
                 } else {
                     json.skipValue();
@@ -67,7 +73,7 @@ public class BaseSubscriber<T> implements Observer<T> {
             json.endObject();
             return errorInfo;
         } catch (Exception e) {
-            Log.e("RxSubscriber onResponse", e.toString());
+            LogUtils.e("RxSubscriber onResponse", e.toString());
         } finally {
             response.close();
             if (json != null) {
