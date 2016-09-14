@@ -2,4 +2,13 @@
     <string name="app_name">architecture</string>
 
     <string name="penner_netfail">错误: 请检查网络</string>
+    <string name="penner_cancel">取消</string>
+
+    <string name="permission">权限申请</string>
+    <string name="permission_setting">去设置</string>
+    <string name="permission_tips">在设置-应用-%1$s-权限中开启%2$s权限, 以正常使用%1$s功能</string>
+    <string name="permission_phone">%1$s使用电话权限确定设备ID, 以保证账号登录的安全性. %1$s不会拨打电话号码或终止通话.\n请在设置-应用-%1$s-权限中开启电话权限,以正常登录%1$s.</string>
+    <string name="permission_micro">麦克风</string>
+    <string name="permission_contact">通讯录</string>
+    <string name="permission_storage">存储空间</string>
 </resources>

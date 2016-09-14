@@ -53,6 +53,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
                     case 2:
                         context.startActivity(new Intent(context, DatabindingActivity.class));
                         break;
+                    case 3:
+                        context.startActivity(new Intent(context, PermissionActivity.class));
+                        break;
                 }
             }
         });

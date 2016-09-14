@@ -18,6 +18,7 @@ public class MainPresenter extends BasePresenter<MainView> {
         datas.add("MVP");
         datas.add("Dagger");
         datas.add("Databinding");
+        datas.add("Permission");
         mainView.loadDatas(datas);
     }
 
